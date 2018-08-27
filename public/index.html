@@ -4,18 +4,10 @@
     <meta charset="utf-8"/>
 </head>
 <body>
-    <p>Welcome!</p>
+    <div id='content'>
+        <p>Welcome!</p>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        let socket = io()
-
-        socket.on('connect', (socket) => {
-            console.log('Connected to server!')
-        })
-
-        socket.on('disconnect', (socket) => {
-            console.log('Disconnected from server!')
-        })
-    </script>
+    <script src="/js/index.js"></script>
 </body>
 </html>
