@@ -9,13 +9,17 @@ socket.on('disconnect', function() {
 })
 
 socket.on('newMessage', function(message) {
-    $('#room').append(`<p>${message.from}: ${message.text}</p>`)
+    var time = moment(message.createAt).format('h:mm a')
+    $('#room').append(`<p>${message.from} ${time}: ${message.text}</p>`)
 })
 
 socket.on('newLocationMessage', function(message) {
+    var time = moment(message.createAt).format('h:mm a')
+    var p = $(`<p>${message.from} ${time}: </p>`)
     var a = $('<a target="_blank">My location</a>')
     a.attr('href', message.url)
-    $('#room').append(a)
+    p.append(a)
+    $('#room').append(p)
 })
 
 $('#message-form').on('submit', function(e) {
