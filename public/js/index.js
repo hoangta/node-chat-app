@@ -60,5 +60,9 @@ locationButton.on('click', function() {
     }, function() {
         locationButton.removeAttr('disabled').text('Send location')
         alert('Unable to fetch location.')
+    }, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
     })
 })
