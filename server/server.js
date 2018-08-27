@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
     socket.on('createMessage', (message, callback) => {
         console.log(`${message.from} said ${message.text}`)
         io.emit('newMessage', makeMessage(message.from, message.text))
-        callback('Wink from server')
+        callback()
     })
 
     socket.on('createLocationMessage', (coords) => {
