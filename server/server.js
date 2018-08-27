@@ -5,7 +5,7 @@ const socketIO = require('socket.io')
 
 const publicPath = path.join(__dirname, '/../public')
 const port = process.env.PORT || 3000
-const {makeMessage} = require('./utils/message')
+const {makeMessage, makeLocationMessage} = require('./utils/message')
 
 var app = express()
 var server = http.createServer(app)
@@ -22,7 +22,11 @@ io.on('connection', (socket) => {
         console.log(`${message.from} said ${message.text}`)
         io.emit('newMessage', makeMessage(message.from, message.text))
         callback('Wink from server')
-        // socket.broadcast.emit('newMessage', makeMessage(message.from, message.text))
+    })
+
+    socket.on('createLocationMessage', (coords) => {
+        console.log(coords)
+        io.emit('newLocationMessage', makeLocationMessage('Admin', coords.lat, coords.lng))
     })
 
     socket.on('disconnect', (socket) => {
