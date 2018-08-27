@@ -9,7 +9,6 @@ socket.on('disconnect', function() {
 })
 
 socket.on('newMessage', function(message) {
-    console.log('new message')
     var p = document.createElement('p')
     var node = document.createTextNode(`${message.from}: ${message.text}`)
     p.appendChild(node)
