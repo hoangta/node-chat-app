@@ -18,10 +18,11 @@ io.on('connection', (socket) => {
 
     socket.emit('newMessage', makeMessage('Admin', 'Welcome to the chat app!'))
     socket.broadcast.emit('newMessage', makeMessage('Admin', 'Someone joined the room!'))
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
         console.log(`${message.from} said ${message.text}`)
-        // io.emit('newMessage', message)
-        socket.broadcast.emit('newMessage', makeMessage(message.from, message.text))
+        io.emit('newMessage', makeMessage(message.from, message.text))
+        callback('Wink from server')
+        // socket.broadcast.emit('newMessage', makeMessage(message.from, message.text))
     })
 
     socket.on('disconnect', (socket) => {

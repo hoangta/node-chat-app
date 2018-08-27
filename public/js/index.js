@@ -9,8 +9,16 @@ socket.on('disconnect', function() {
 })
 
 socket.on('newMessage', function(message) {
-    var p = document.createElement('p')
-    var node = document.createTextNode(`${message.from}: ${message.text}`)
-    p.appendChild(node)
-    document.getElementById('content').appendChild(p)
+    $('#room').append(`<p>${message.from}: ${message.text}</p>`)
+})
+
+$('#message-form').on('submit', function(e) {
+    e.preventDefault()
+
+    socket.emit('createMessage', {
+        from: 'User',
+        text: $('#message').val()
+    }, function(message) {
+        console.log(message)
+    })
 })
